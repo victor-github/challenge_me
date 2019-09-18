@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :complete]
 
   # GET /tasks
   # GET /tasks.json
@@ -58,6 +58,17 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # POST /tasks/1
+  # POST /tasks/1.json
+  def complete
+    @task.update_attribute(:completed, true)
+    respond_to do |format|
+      format.html { redirect_to tasks_url, notice: 'Task was successfully completed.'}
+      #TODO
+      #format.json { head :no_content }
     end
   end
 
